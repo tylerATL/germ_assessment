@@ -6,13 +6,17 @@ import sys
 
 
 def open_and_process_image():
-    pic = cv.imread(r"C:\Users\TylerThompson\OneDrive - Gotham Greens Holdings, LLC\Desktop\IMG_0883.JPG")
 
+
+    alpha = .9
+    beta = 60
+    pic = cv.imread(r".\IMG_0883.JPG")
     denoised = cv.GaussianBlur(pic,ksize=(21,21),sigmaX=0,sigmaY=0)
+    brightened = cv.convertScaleAbs(denoised,alpha=alpha,beta=beta)
 
 
 
-    hsv = cv.cvtColor(denoised, cv.COLOR_BGR2HSV)
+    hsv = cv.cvtColor(brightened, cv.COLOR_BGR2HSV)
 
     # define range of green color in HSV
     lower_green = np.array([30,80,100])
